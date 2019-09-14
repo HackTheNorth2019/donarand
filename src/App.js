@@ -9,6 +9,8 @@ class App extends Component {
   render() {
     return (
       <div>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAGuNHq0Pwt5S0dkhlCULDFTYbWNSszRQ&callback=initMap"
+        type="text/javascript"></script>
 
         <Router>
      
