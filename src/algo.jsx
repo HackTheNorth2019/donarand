@@ -57,6 +57,8 @@ class Algo extends Component
             console.log("Transaction : " + tx.txId);
         }catch(e){
             console.log(e);
+
+            
         }
     }
 
