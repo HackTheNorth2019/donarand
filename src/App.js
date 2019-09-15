@@ -115,6 +115,49 @@ handleClick(e){
   this.setState({ login: true });
 }
 
+
+async getTx() {
+  
+   
+ var user =  await  firebase.database().ref(this.state.bloodgroup).once('value').then(function (snapshot) {
+        var username = snapshot.val() 
+        return username
+        console.log(username);
+        
+    })
+
+
+var result = user
+const txs = []
+Object.values(user).forEach((value) =>{
+  txs.push(value.transaction)
+})
+
+console.log(txs[0]);
+// let result = JSON.parse(result1)
+// console.log(result)
+
+
+
+// result.forEach((value) =>{
+//   console.log(value)
+// })
+const txsname = [];
+
+  for(let i=0; i<txs.length;i++){
+    var name = await algodclient.transactionById(txs[i]);
+    console.log(name)
+    let encodednote = JSON.stringify(algosdk.decodeObj(name.note), undefined, 4);
+    console.log(encodednote);
+     txsname.push(encodednote);
+  }
+  for(let i = 0 ;i<txsname.length;i++){
+    console.log(txsname[i]);
+  }
+  
+}
+
+
 async handleSubmit(e){
 
  
@@ -176,6 +219,7 @@ async handleSubmit(e){
 
     
 }
+this.getTx()
 
 }
 
