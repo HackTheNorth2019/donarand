@@ -16,6 +16,12 @@ const server = "http://hackathon.algodev.network";
 const port = 9100;
 const algodclient = new algosdk.Algod(token, server, port);
 
+var latitude = {
+
+}
+var longitude = {
+
+}
 
 //   const baseServer = "http://hackathon.algodev.network";
 // const aport = 9100;
@@ -111,33 +117,34 @@ handleClick(e){
 
 async handleSubmit(e){
 
-  var latitude = {
-
-  }
-  var longitude = {
-
-  }
+ 
   e.preventDefault();
   console.log(this.state.email)
   console.log(this.state.bloodgroup)
   console.log(this.state.address)
-  geocodeByAddress(this.state.address)
+  const location = await geocodeByAddress(this.state.address)
   .then(results => getLatLng(results[0]))
   .then(({ lat, lng }) =>{
     console.log(lat)
+    console.log(lng)
     latitude[0] = lat 
    longitude[0] = lng
+   return {
+     lat : lat,
+     lng : lng
+   }
   }
    
   );
+  console.log(location)
 
   
-  console.log(longitude[0])
+  console.log(this.state.longitude)
   let data = {
     email : this.state.email,
     bloodgroup : this.state.bloodgroup,
-    latitude: latitude[0],
-    longitude: longitude[0]
+    latitude: location.lat,
+    longitude: location.lng
   }
 
   try{
