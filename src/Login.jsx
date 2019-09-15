@@ -8,7 +8,7 @@ import * as Data from './data.js';
 import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
-import Particles from 'react-particles-js'
+import particles from 'react-particles-js'
 
 import {Form,Col,Button} from 'react-bootstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
