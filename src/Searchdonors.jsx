@@ -20,6 +20,8 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
+import './styles.css'
+
 import MyDropDown from './MyDropDown.jsx'
 import { GoogleMap, LoadScript, useLoadScript, Marker } from '@react-google-maps/api';
 
@@ -51,14 +53,16 @@ const Searchdonors = () => {
 	
 	return(        
 		<Page>
+
 			<div style={{textAlign: "center", background:'#fff'}}>
+			<div style={{height:30}}/>
 			 <Grid container spacing={0}>
 		        
 		        <Grid item xs={12}>
 		           
-			      <MyDropDown items={Data.organ_items} formControl={classes.formControl} setItem={setOrganSearchParam}/>
+			      <MyDropDown items={Data.organ_items} flavorText={"Item:"} formControl={classes.formControl} setItem={setOrganSearchParam}/>
 			      <span> &nbsp; &nbsp; </span>
-			      <MyDropDown items={Data.blood_items} formControl={classes.formControl} setItem={setBloodSearchParam}/> 
+			      <MyDropDown items={Data.blood_items} flavorText={"Blood Type:"} formControl={classes.formControl} setItem={setBloodSearchParam}/> 
 	
 			      	<div style={{height:10}}/>
 			        <div style={{height:70}}>

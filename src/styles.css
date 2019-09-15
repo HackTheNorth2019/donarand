@@ -85,7 +85,15 @@ body {
 
 }
 
-.myFill{
+.myFill {
   width:100%;
-  height:100%;
+  height:60%;
+}
+
+.ihatethis {
+  width:80%;
+}
+
+.ihatethis2 {
+  width:10%;
 }

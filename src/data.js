@@ -5,9 +5,9 @@ export const navbar_items = [
 ]
 
 
-export const NAME = 'DonorAnd';
+export const NAME = 'DonerChain';
 
-export const HEADER_TEXT = 'A modern approach to organ and tissue donations'
+export const HEADER_TEXT = 'A modern solution to organ and tissue donations'
 
 export const blood_items=['A+', 'A-', 'AB+', 'AB-', 'B+', 'B-', 'O+', 'O-'];
 export const organ_items=['Blood', 'Heart', 'Lung', 'Kidney', 'Bone Marrow'];

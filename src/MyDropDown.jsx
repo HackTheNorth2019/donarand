@@ -34,7 +34,7 @@ const MyDropDown = (props) => {
 
 	return (
 		<FormControl className={props.formControl} style={{width:200}}>
-        <InputLabel htmlFor="age-helper">Blood Type:</InputLabel>
+        <InputLabel htmlFor="age-helper">{props.flavorText}</InputLabel>
 	        <Select
 	         value={active}
 	         onChange={(e) => {

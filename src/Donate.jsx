@@ -20,6 +20,8 @@ import Page from './Page.jsx'
 import MyDropDown from './MyDropDown.jsx'
 import * as Data from './data.js'
 
+import './styles.css'
+
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
@@ -202,40 +204,53 @@ render(){
     <Page >
    
       <div style={{textAlign: "center", background:'#fff'}}>
-        <Grid container spacing={3}>
-            <Grid item xs={12}>
+        <div style={{height:30}}/>
+        <Grid container spacing={3} direction="column" justify="center">
+          <div style={{textAlign: "center"}}>
+            <Grid item xs={15}>
                <form className={this.classes.container} noValidate autoComplete="off">
-              <div>
-                <TextField
-                  id="outlined-name"
-                  label="email"
-                  className={this.classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  onChange={(e) => {this.handleChangeone(e)}}
-                />
+                <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                                    <div className="ihatethis"/>
+
+                  <TextField
+                    id="outlined-full-width"
+                    label="Email"
+                    style={{ margin: 8 }}
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    onChange={(e) => {this.handleChangeone(e)}}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                   <div className="ihatethis"/>
+        
                 </div>
-                <div>
-                
+                <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                  <div className="ihatethis"/>
                   <GooglePlacesAutocomplete
+                    style={{textAlign:'center'}}
                     onSelect={({ description }) => (
                     this.setState({ address: description })
                   )}
                   />
+                  <div className="ihatethis"/>
                 </div>
               <div>
-                <MyDropDown items={Data.organ_items} formControl={this.classes.formControl} setItem={this.setOrganSearchParam}/>
+                <MyDropDown items={Data.organ_items} flavorText={"Item:"} formControl={this.classes.formControl} setItem={this.setOrganSearchParam}/>
                 <span> &nbsp; &nbsp; </span>
-                <MyDropDown items={Data.blood_items} formControl={this.classes.formControl} setItem={this.setBloodSearchParam}/> 
+                <MyDropDown items={Data.blood_items} flavorText={"Blood Type:"} formControl={this.classes.formControl} setItem={this.setBloodSearchParam}/> 
               </div>
             </form>
             <div style={{height:10}}/>
-            <div style={{height:100}}>
+            <div style={{height:70}}>
                 <Button type="button" color="primary" onClick={(e) => this.handleSubmit(e)}><h2>Submit</h2></Button>
 
             </div>
             </Grid>
-  
+      </div>
            </Grid>
        </div>
           
