@@ -61,7 +61,8 @@ console.log(recoveredAccount.addr);
 // firebase.initializeApp(firebaseConfig);
 
 
-
+var latitude = {}
+var longitude = {}
 
 class Donate extends Component {
  constructor(props){
@@ -75,11 +76,14 @@ class Donate extends Component {
       latitude: 0.00,
       longitude: 0.00,
       organDropDown: "",
-      bloodDropDown: ""
+      bloodDropDown: "",
+      numberofdonors: 1,
+
     };
     this.handleChange  = this.handleChange.bind(this)
     this.handleChangeone = this.handleChangeone.bind(this)
     this.handleChangetwo = this.handleChangetwo.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.setOrganSearchParam = this.setOrganSearchParam.bind(this)
     this.setBloodSearchParam = this.setBloodSearchParam.bind(this)
     this.classes=makeStyles(theme => ({
@@ -114,42 +118,44 @@ handleChangetwo(event) {
 }
 
  setOrganSearchParam = (name) => {
-  this.state.organDropDown = name;
+  this.setState({organDropDown: name})
  }
 
  setBloodSearchParam = (name) => {
-  this.state.bloodDropDown = name;
+  this.setState({bloodgroup: name});
  }
 
+
+
 async handleSubmit(e){
-
-  var latitude = {
-
-  }
-  var longitude = {
-
-  }
   e.preventDefault();
   console.log(this.state.email)
   console.log(this.state.bloodgroup)
   console.log(this.state.address)
-  geocodeByAddress(this.state.address)
+  const location = await geocodeByAddress(this.state.address)
   .then(results => getLatLng(results[0]))
   .then(({ lat, lng }) =>{
     console.log(lat)
+    console.log(lng)
     latitude[0] = lat 
     longitude[0] = lng
+   return {
+     lat : lat,
+     lng : lng
+   }
   }
    
   );
+  console.log(location)
 
-  
-  console.log(longitude[0])
   let data = {
     email : this.state.email,
     bloodgroup : this.state.bloodgroup,
-    lat: latitude[0],
-    lng: longitude[0]
+    latitude: location.lat,
+    longitude: location.lng,
+    number: this.state.numberofdonors,
+    organ: this.state.organDropDown
+   
   }
 
   try{
@@ -178,9 +184,14 @@ async handleSubmit(e){
     });
 }catch(e){
     console.log(e);
+
+    
 }
 
+
 }
+
+
 
 
 render(){
@@ -218,7 +229,7 @@ render(){
             </form>
             <div style={{height:10}}/>
             <div style={{height:100}}>
-                <Button type="button" color="primary"><h2>Submit</h2></Button>
+                <Button type="button" color="primary" onClick={(e) => this.handleSubmit(e)}><h2>Submit</h2></Button>
 
             </div>
             </Grid>
