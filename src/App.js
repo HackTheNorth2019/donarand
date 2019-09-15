@@ -11,6 +11,7 @@ import {
   TransitionGroup 
 } from 'react-transition-group';
 import TopNavbar from './Navbar.jsx'
+import particles from 'react-particles-js';
 
 import './styles.css';
 var regex = /\b(?!home)\b\S+/i;
