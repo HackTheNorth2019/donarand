@@ -1,4 +1,5 @@
 import React, { Component, useState} from 'react';
+import algosdk from 'algosdk'
 import TopNavbar from './Navbar.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,6 +19,11 @@ import Page from './Page.jsx'
 
 import MyDropDown from './MyDropDown.jsx'
 import { GoogleMap, LoadScript, useLoadScript, Marker } from '@react-google-maps/api';
+
+const token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1";
+const server = "http://hackathon.algodev.network";
+const port = 9100;
+const algodclient = new algosdk.Algod(token, server, port);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -71,6 +77,45 @@ const Searchdonors = () => {
 
 const fetchMarkerData = (arg1, arg2, callback) => {
 	console.log(arg1 + arg2)
+
+  
+   
+		var user =  await  firebase.database().ref(arg1).once('value').then(function (snapshot) {
+					 var username = snapshot.val() 
+					 return username
+					 console.log(username);
+					 
+			 })
+	 
+	 
+	 var result = user
+	 const txs = []
+	 Object.values(user).forEach((value) =>{
+		 txs.push(value.transaction)
+	 })
+	 
+	 console.log(txs[0]);
+	 // let result = JSON.parse(result1)
+	 // console.log(result)
+	 
+	 
+	 
+	 // result.forEach((value) =>{
+	 //   console.log(value)
+	 // })
+	 const txsname = [];
+	 
+		 for(let i=0; i<txs.length;i++){
+			 var name = await algodclient.transactionById(txs[i]);
+			 console.log(name)
+			 let encodednote = JSON.stringify(algosdk.decodeObj(name.note), undefined, 4);
+			 console.log(encodednote);
+				txsname.push(encodednote);
+		 }
+		 for(let i = 0 ;i<txsname.length;i++){
+			 console.log(txsname[i]);
+		 }
+		 
 	/// Function to get marker data
 	// Only blood param matters, ignore the other one
 	// do callback(what the blockchainreturns)
