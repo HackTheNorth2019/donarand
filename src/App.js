@@ -10,6 +10,7 @@ import {
   CSSTransition, 
   TransitionGroup 
 } from 'react-transition-group';
+import Particles from 'react-particles-js'
 import TopNavbar from './Navbar.jsx'
 
 import './styles.css';
@@ -23,37 +24,7 @@ class App extends Component {
     return (
       <div>
       
-        <Router forceRefresh={!supportsHistory}>
-      
-        <Particles
-                params={{
-                    "particles": {
-                        "line_linked": {
-                                    "color":"#FFFFFF"
-                                    },
-                        "number": {
-                            "value": 150
-                        },
-                        "size": {
-                            "value": 5
-                        }
-                    },
-                    "interactivity": {
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "repulse"
-                            }
-                        }
-                    }
-                }}
-                style={{
-                        width: '100%',
-                        background: `#000000` 
-                 }}
-                />
-     
-            
+        <Router forceRefresh={!supportsHistory}>            
             <div>
               <Route exact path="/" component={Login}/>
               <Route path={regex} component={TopNavbar} />
@@ -96,10 +67,9 @@ class App extends Component {
                 />
               </main>
             </div>
-        </Router>
-
-
-
+      
+            </Router>
+        
       </div>
     );
   }

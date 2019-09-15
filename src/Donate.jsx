@@ -199,34 +199,8 @@ render(){
   
   return(
     <Page >
-    <Particles
-                params={{
-                    "particles": {
-                        "line_linked": {
-                                    "color":"#FFFFFF"
-                                    },
-                        "number": {
-                            "value": 150
-                        },
-                        "size": {
-                            "value": 5
-                        }
-                    },
-                    "interactivity": {
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "repulse"
-                            }
-                        }
-                    }
-                }}
-                style={{
-                        width: '100%',
-                        background: `#000000` 
-                 }}
-                />
-      <div style={{textAlign:'center'}}>
+   
+      <div style={{textAlign: "center", background:'#fff'}}>
         <Grid container spacing={3}>
             <Grid item xs={12}>
                <form className={this.classes.container} noValidate autoComplete="off">

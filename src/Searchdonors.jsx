@@ -51,8 +51,8 @@ const Searchdonors = () => {
 	
 	return(        
 		<Page>
-			<div style={{textAlign: "center"}}>
-			 <Grid container spacing={3}>
+			<div style={{textAlign: "center", background:'#fff'}}>
+			 <Grid container spacing={0}>
 		        
 		        <Grid item xs={12}>
 		           
@@ -61,7 +61,7 @@ const Searchdonors = () => {
 			      <MyDropDown items={Data.blood_items} formControl={classes.formControl} setItem={setBloodSearchParam}/> 
 	
 			      	<div style={{height:10}}/>
-			        <div style={{height:100}}>
+			        <div style={{height:70}}>
 			      		<Button type="button" color="primary" onClick={() => fetchMarkerData(bloodSearchParam, organSearchParam, setMarkerData)}><h2>Search</h2></Button>
 					</div>
 
@@ -165,7 +165,7 @@ const MyMap = (props) => {
         <GoogleMap
           id='example-map'
           id="circle-example"
-		    mapContainerStyle={{"display":'flex', "flexDirection":'column', "height":"60vh", 'flexGrow':1, "width" : "100%"}}
+		    mapContainerStyle={{"display":'flex', "flexDirection":'column', "height":"64vh", 'flexGrow':1, "width" : "100%"}}
 		    zoom={9}
 		    center={{
 		      lat: 43.6532,

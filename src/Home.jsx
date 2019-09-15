@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
 import WelcomeHeader from './WelcomeHeader';
+import ParticlesWrap from './ParticlesWrapper.jsx'
 
 import * as Data from './data.js';
 
@@ -83,6 +84,13 @@ const Home = () => {
 		        
 		      </Grid>
 	    	</div>
+	    	  <div style={{height:200}}/>
+
+        <div style={{height:100, textAlign:'center'}}> Powered with: &nbsp; <img src={require('./algorand.png')} /> &nbsp; &nbsp; and <img src={require('./firebase.png')} /> </div>
+
+	    	 <div className="myFill" style={{position:'absolute', top:0, left:0, zIndex:-100}}>
+            <ParticlesWrap/>
+            </div>
     	</div>
 	);	
 }

@@ -9,6 +9,8 @@ import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
 import Particles from 'react-particles-js'
+import './styles.css';
+import ParticlesWrap from './ParticlesWrapper.jsx'
 
 import {Form,Col,Button} from 'react-bootstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -104,33 +106,7 @@ render(){
     return(<Redirect push to="/home"/>)
   }
   return(
-    <Particles
-                params={{
-                    "particles": {
-                        "line_linked": {
-                                    "color":"#FFFFFF"
-                                    },
-                        "number": {
-                            "value": 150
-                        },
-                        "size": {
-                            "value": 5
-                        }
-                    },
-                    "interactivity": {
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "repulse"
-                            }
-                        }
-                    }
-                }}
-                style={{
-                        width: '100%',
-                        background: `#000000` 
-                 }}
-                />
+    <div>
     <div style={{display:'flex', flexDirection:'column', alignItems:"center", justifyContent:"center"}}>
       <WelcomeHeader/>
         <Fragment>
@@ -138,6 +114,12 @@ render(){
           onClick={(e) => {this.handleClick(e)}}
           />
         </Fragment>
+        <div style={{height:200}}/>
+        <div style={{height:100}}> Powered with: &nbsp; <img src={require('./algorand.png')} /> &nbsp; &nbsp; and <img src={require('./firebase.png')} /> </div>
+    </div>
+     <div className="myFill" style={{position:'absolute', top:0, left:0, zIndex:-100}}>
+            <ParticlesWrap/>
+            </div>
     </div>
   )
 }

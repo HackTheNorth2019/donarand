@@ -30,7 +30,7 @@ const Searchhistory = () => {
 	return(        
 		<Page>
 			
-			<div style={{textAlign: "center"}}>
+			<div style={{textAlign: "center", background:'#fff'}}>
 			 <Grid container spacing={3}>
 	
 		        <Grid item xs={12}>
@@ -104,7 +104,8 @@ const Searchhistory = () => {
 
 			      
 			      </form>
-			      <div style={{height:100}}>
+			      <div style={{height:10}}/>
+			      <div style={{height:80}}>
 			      		<Button type="button" color="primary"><h2>Search</h2></Button>
 
 				    </div>

@@ -13,6 +13,8 @@ import {
     DropdownMenu,
     DropdownItem } from 'reactstrap';
 
+import ParticlesWrap from './ParticlesWrapper'
+
 
 import * as Data from './data.js';
 
@@ -52,26 +54,13 @@ export default class TopNavbar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {this.genOptions()}
-                {/*<UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
-                    Options
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem>
-                      Option 1
-                    </DropdownItem>
-                    <DropdownItem>
-                      Option 2
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>
-                      Reset
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>*/}
+              
               </Nav>
             </Collapse>
           </Navbar>
+           <div className="myFill" style={{position:'absolute', top:0, left:0, zIndex:-100}}>
+            <ParticlesWrap/>
+            </div>
         </div>
       );
     }
