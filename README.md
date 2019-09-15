@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -140,6 +141,9 @@ Read instructions below for using assets from JavaScript and HTML.
 
 You can, however, create more top-level directories.<br>
 They will not be included in the production build so you can use them for things like documentation.
+=======
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+>>>>>>> cb7b224eea7b1f17352b32c14ef5fc22b6772ee9
 
 ## Available Scripts
 
@@ -156,7 +160,11 @@ You will also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
+<<<<<<< HEAD
 See the section about [running tests](#running-tests) for more information.
+=======
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+>>>>>>> cb7b224eea7b1f17352b32c14ef5fc22b6772ee9
 
 ### `npm run build`
 
@@ -166,7 +174,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
+<<<<<<< HEAD
 See the section about [deployment](#deployment) for more information.
+=======
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+>>>>>>> cb7b224eea7b1f17352b32c14ef5fc22b6772ee9
 
 ### `npm run eject`
 
@@ -178,6 +190,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+<<<<<<< HEAD
 ## Supported Language Features and Polyfills
 
 This project supports a superset of the latest JavaScript standard.<br>
@@ -1621,3 +1634,34 @@ Please refer to [this section](#resolving-heroku-deployment-errors).
 ## Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
+=======
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+>>>>>>> cb7b224eea7b1f17352b32c14ef5fc22b6772ee9
