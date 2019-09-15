@@ -6,9 +6,19 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
-import Page from './Page.jsx'
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import {Link} from 'react-router-dom';
 
-import {Form,Col,Button} from 'react-bootstrap';
+import clsx from 'clsx';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Page from './Page.jsx'
+import MyDropDown from './MyDropDown.jsx'
+import * as Data from './data.js'
+
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
@@ -51,6 +61,8 @@ console.log(recoveredAccount.addr);
 // firebase.initializeApp(firebaseConfig);
 
 
+
+
 class Donate extends Component {
  constructor(props){
     super(props);
@@ -61,11 +73,25 @@ class Donate extends Component {
       address: '',
       email: '',
       latitude: 0.00,
-      longitude: 0.00
+      longitude: 0.00,
+      organDropDown: "",
+      bloodDropDown: ""
     };
     this.handleChange  = this.handleChange.bind(this)
     this.handleChangeone = this.handleChangeone.bind(this)
     this.handleChangetwo = this.handleChangetwo.bind(this)
+    this.setOrganSearchParam = this.setOrganSearchParam.bind(this)
+    this.setBloodSearchParam = this.setBloodSearchParam.bind(this)
+    this.classes=makeStyles(theme => ({
+        root: {
+          flexGrow: 1,
+        },
+        paper: {
+          padding: theme.spacing(2),
+          textAlign: 'center',
+          color: theme.palette.text.secondary,
+        },
+      }));
   }
 
   async componentDidMount(){
@@ -87,6 +113,14 @@ handleChangetwo(event) {
   this.setState({bloodgroup: event.target.value});
 }
 
+ setOrganSearchParam = (name) => {
+  this.state.organDropDown = name;
+ }
+
+ setBloodSearchParam = (name) => {
+  this.state.bloodDropDown = name;
+ }
+
 async handleSubmit(e){
 
   var latitude = {
@@ -104,7 +138,7 @@ async handleSubmit(e){
   .then(({ lat, lng }) =>{
     console.log(lat)
     latitude[0] = lat 
-   longitude[0] = lng
+    longitude[0] = lng
   }
    
   );
@@ -114,8 +148,8 @@ async handleSubmit(e){
   let data = {
     email : this.state.email,
     bloodgroup : this.state.bloodgroup,
-    latitude: latitude[0],
-    longitude: longitude[0]
+    lat: latitude[0],
+    lng: longitude[0]
   }
 
   try{
@@ -150,64 +184,51 @@ async handleSubmit(e){
 
 
 render(){
+
   
   return(
-    <Page>
-      <Form>
-      <Form.Row>
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email"  value={this.state.email} onChange={this.handleChangeone} />
-        </Form.Group>
-    
-      </Form.Row>
-    
-      <GooglePlacesAutocomplete
-        onSelect={({ description }) => (
-        this.setState({ address: description })
-      )}
-      />
-    
-      <Form.Row>
-      
-    
-        <Form.Group as={Col} controlId="formGridState" >
-          <Form.Label>Blood available for donation :</Form.Label>
-          <Form.Control as="select" value={this.state.bloodgroup} onChange={this.handleChangetwo} > 
-            <option></option>
-            <option>A+</option>
-            <option>A-</option>
-            <option>B-</option>
-            <option>B+</option>
-            <option>AB+</option>
-            <option>AB-</option>
-            <option>O+</option>
-            <option>O-</option>
-          </Form.Control>
-        </Form.Group>
-    
-        
-      </Form.Row>
-    
-      <Form.Group id="formGridCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-    
-      <Button variant="primary" type="submit" onClick={(e) => this.handleSubmit(e)}>
-        Submit
-      </Button>
-    </Form>
+    <Page >
+      <div style={{textAlign:'center'}}>
+        <Grid container spacing={3}>
+            <Grid item xs={12}>
+               <form className={this.classes.container} noValidate autoComplete="off">
+              <div>
+                <TextField
+                  id="outlined-name"
+                  label="email"
+                  className={this.classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                  onChange={(e) => {this.handleChangeone(e)}}
+                />
+                </div>
+                <div>
+                
+                  <GooglePlacesAutocomplete
+                    onSelect={({ description }) => (
+                    this.setState({ address: description })
+                  )}
+                  />
+                </div>
+              <div>
+                <MyDropDown items={Data.organ_items} formControl={this.classes.formControl} setItem={this.setOrganSearchParam}/>
+                <span> &nbsp; &nbsp; </span>
+                <MyDropDown items={Data.blood_items} formControl={this.classes.formControl} setItem={this.setBloodSearchParam}/> 
+              </div>
+            </form>
+            <div style={{height:10}}/>
+            <div style={{height:100}}>
+                <Button type="button" color="primary"><h2>Submit</h2></Button>
+
+            </div>
+            </Grid>
+  
+           </Grid>
+       </div>
+          
   </Page>
   )
 }
 }
 
 export default Donate;
-
-
-//local host 1
-//local host 2
-
-
-// two sign in - one as donor
-// one as reci

@@ -16,6 +16,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import * as Data from './data.js';
 import Page from './Page.jsx'
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
 import MyDropDown from './MyDropDown.jsx'
 import { GoogleMap, LoadScript, useLoadScript, Marker } from '@react-google-maps/api';
@@ -43,8 +46,7 @@ const Searchdonors = () => {
 	const [organSearchParam, setOrganSearchParam] = useState("");
 
 	const classes = useStyles();
-	var blood_items=['A+', 'A-', 'AB+', 'AB-', 'B+', 'B-', 'O+', 'O-'];
-	var organ_items=['Blood', 'Heart', 'Lung', 'Kidney', 'Bone Marrow'];
+
 
 	
 	return(        
@@ -54,17 +56,17 @@ const Searchdonors = () => {
 		        
 		        <Grid item xs={12}>
 		           
-			      <MyDropDown items={organ_items} formControl={classes.formControl} setItem={setOrganSearchParam}/>
+			      <MyDropDown items={Data.organ_items} formControl={classes.formControl} setItem={setOrganSearchParam}/>
 			      <span> &nbsp; &nbsp; </span>
-			      <MyDropDown items={blood_items} formControl={classes.formControl} setItem={setBloodSearchParam}/> 
+			      <MyDropDown items={Data.blood_items} formControl={classes.formControl} setItem={setBloodSearchParam}/> 
 	
-			      
+			      	<div style={{height:10}}/>
 			        <div style={{height:100}}>
 			      		<Button type="button" color="primary" onClick={() => fetchMarkerData(bloodSearchParam, organSearchParam, setMarkerData)}><h2>Search</h2></Button>
 					</div>
 
 					
-				    <MyMap props={markerData}/>
+				    <MyMap markerData={markerData}/>
 				    
 		        </Grid>
 	
@@ -75,8 +77,8 @@ const Searchdonors = () => {
 	);	
 }
 
-const fetchMarkerData = (arg1, arg2, callback) => {
-	console.log(arg1 + arg2)
+async function fetchMarkerData(arg1, arg2, callback) {
+	//console.log(arg1 + arg2)
 
   
    
@@ -107,14 +109,14 @@ const fetchMarkerData = (arg1, arg2, callback) => {
 	 
 		 for(let i=0; i<txs.length;i++){
 			 var name = await algodclient.transactionById(txs[i]);
-			 console.log(name)
+			 // console.log(name)
 			 let encodednote = JSON.stringify(algosdk.decodeObj(name.note), undefined, 4);
-			 console.log(encodednote);
+			 // console.log(encodednote);
 				txsname.push(encodednote);
 		 }
-		 for(let i = 0 ;i<txsname.length;i++){
-			 console.log(txsname[i]);
-		 }
+		 
+		callback(txsname);
+		 
 		 
 	/// Function to get marker data
 	// Only blood param matters, ignore the other one
@@ -137,29 +139,29 @@ NOTE: Markers are retrieved with the schema:
 */
 
 const MyMap = (props) => {
-	
+	//console.log("Map render" + props.markerData);
 	function genMarkers(){
 		var ret = []
 		for(var i = 0; i < props.markerData.length; i++){
+			var data_t = JSON.parse(props.markerData[i])
+			if(!data_t.latitude || ! data_t.longitude){
+				continue;
+			}
+			//console.log(data_t.latitude + " " + data_t.longitude)
 			ret.push(
-			<Marker
-		      onLoad={marker => {
-		        console.log('marker: ', marker)
-		      }}
-		      position={{
-		        lat: props.markerData[i].lat,
-		        lng: props.markerData[i].lng,
-		      }}
-		    />)
+				<Marker
+				  key={"marker" + i + props.markerData[i].latitude}
+			      position={{
+			        lat: parseFloat(data_t.latitude),
+			        lng: parseFloat(data_t.longitude)
+			      }}
+			    />)
 	   }
 	   return ret;
 	}
- 
+ 	
      return (
-      <LoadScript
-        id="script-loader"
-        googleMapsApiKey="AIzaSyAAGuNHq0Pwt5S0dkhlCULDFTYbWNSszRQ"
-      >
+      
         <GoogleMap
           id='example-map'
           id="circle-example"
@@ -170,9 +172,9 @@ const MyMap = (props) => {
 		      lng: -79.3832
 		    }}
         >
-         genMarkers() 
+         {genMarkers() }
         </GoogleMap>
-      </LoadScript>
+      
      )
   
 }
