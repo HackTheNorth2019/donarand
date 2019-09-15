@@ -57,7 +57,34 @@ const Home = () => {
         return ret;
     }
 
-	return(        
+	return( 
+		<Particles
+			      params={{
+				particles: {
+				  line_linked: {
+				    color: "#FFFFFF"
+				  },
+				  number: {
+				    value: 1050
+				  },
+				  size: {
+				    value: 50
+				  }
+				},
+				interactivity: {
+				  events: {
+				    onhover: {
+				      enable: true,
+				      mode: "repulse"
+				    }
+				  }
+				}
+			      }}
+			      style={{
+				width: "100%",
+				background: `#000000`
+			      }}
+		 />
 		<div id="homewrapper">
 			<Button onClick={call()}/>
 			<WelcomeHeader/>

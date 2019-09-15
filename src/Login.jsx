@@ -8,7 +8,6 @@ import * as Data from './data.js';
 import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
-import Particles from 'react-particles-js'
 import './styles.css';
 import ParticlesWrap from './ParticlesWrapper.jsx'
 
