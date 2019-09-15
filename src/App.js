@@ -6,7 +6,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
-
+import CryptoJS from 'crypto-js';
 import {Form,Col,Button} from 'react-bootstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
@@ -15,7 +15,7 @@ const token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1"
 const server = "http://hackathon.algodev.network";
 const port = 9100;
 const algodclient = new algosdk.Algod(token, server, port);
-
+var encryptedfile = ''
 var latitude = {
 
 }
@@ -66,12 +66,17 @@ class App extends Component {
       address: '',
       email: '',
       latitude: 0.00,
-      longitude: 0.00
+      longitude: 0.00,
+      encrypted: '',
+      organ: ''
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange  = this.handleChange.bind(this)
     this.handleChangeone = this.handleChangeone.bind(this)
     this.handleChangetwo = this.handleChangetwo.bind(this)
+    this.handleChangethree = this.handleChangethree.bind(this)
+    this.handleChangefour = this.handleChangefour.bind(this)
+    this.onChangeHandler = this.onChangeHandler.bind(this)
   }
 
   async componentDidMount(){
@@ -91,6 +96,30 @@ handleChangeone(event) {
 handleChangetwo(event) {
   event.preventDefault();
   this.setState({bloodgroup: event.target.value});
+}
+handleChangethree(event) {
+  event.preventDefault();
+  this.setState({numberofdonors: event.target.value});
+}
+
+handleChangefour(event){
+  event.preventDefault();
+  this.setState({organ: event.target.value});
+}
+
+onChangeHandler(event){
+  event.preventDefault();
+  var file = event.target.files[0];
+  var reader = new FileReader();
+  
+  reader.onload = function (event) {
+     var data = event.target.result;
+     encryptedfile = CryptoJS.SHA256( data );
+   console.log('encrypted: ' + encryptedfile);
+  
+    
+  };
+  
 }
 handleClick(e){
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -187,7 +216,10 @@ async handleSubmit(e){
     email : this.state.email,
     bloodgroup : this.state.bloodgroup,
     latitude: location.lat,
-    longitude: location.lng
+    longitude: location.lng,
+    number: this.state.numberofdonors,
+    organ: this.state.organ
+   
   }
 
   try{
@@ -260,9 +292,31 @@ render(){
           <option>O-</option>
         </Form.Control>
       </Form.Group>
+        
+      <Form.Group as={Col} controlId="formGridState" >
+        <Form.Label>Organ available for donation :</Form.Label>
+        <Form.Control as="select" value={this.state.organ} onChange={this.handleChangefour} > 
+          <option></option>
+          <option>Heart</option>
+          <option>Blood</option>
+          <option>Lungs</option>
+          <option>Kidney</option>
+         
+        </Form.Control>
+      </Form.Group>
   
       
     </Form.Row>
+
+    <Form.Row>
+      <Form.Group as={Col} controlId="formGridNumber">
+        <Form.Label>Number of Donors available</Form.Label>
+        <Form.Control type="text" placeholder="Enter number of donors available"  value={this.state.number} onChange={this.handleChangethree} />
+      </Form.Group>
+  
+    </Form.Row>
+
+    <input type="file" name="file" value = {this.state.encrypted} onChange={this.onChangeHandler}/>
   
     <Form.Group id="formGridCheckbox">
       <Form.Check type="checkbox" label="Check me out" />
