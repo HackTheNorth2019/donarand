@@ -8,6 +8,7 @@ import * as Data from './data.js';
 import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
+import Particles from 'react-particles-js'
 
 import {Form,Col,Button} from 'react-bootstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -103,6 +104,33 @@ render(){
     return(<Redirect push to="/home"/>)
   }
   return(
+    <Particles
+                params={{
+                    "particles": {
+                        "line_linked": {
+                                    "color":"#FFFFFF"
+                                    },
+                        "number": {
+                            "value": 150
+                        },
+                        "size": {
+                            "value": 5
+                        }
+                    },
+                    "interactivity": {
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "repulse"
+                            }
+                        }
+                    }
+                }}
+                style={{
+                        width: '100%',
+                        background: `#000000` 
+                 }}
+                />
     <div style={{display:'flex', flexDirection:'column', alignItems:"center", justifyContent:"center"}}>
       <WelcomeHeader/>
         <Fragment>
