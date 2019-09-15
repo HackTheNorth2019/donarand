@@ -11,6 +11,7 @@ import clsx from 'clsx';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import * as Data from './data.js';
+import Page from './Page.jsx'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,13 +28,11 @@ const useStyles = makeStyles(theme => ({
 const Searchhistory = () => {
 	const classes = useStyles();
 	return(        
-		<div>
-			<TopNavbar/>
+		<Page>
+			
 			<div style={{textAlign: "center"}}>
 			 <Grid container spacing={3}>
-		        <Grid item xs={12}>
-		          <Paper className={classes.paper}><h1>Search Past Donations</h1></Paper>
-		        </Grid>
+	
 		        <Grid item xs={12}>
 		           <form className={classes.container} noValidate autoComplete="off">
 				      <div>
@@ -113,7 +112,7 @@ const Searchhistory = () => {
 	
 		       </Grid>
 			</div>
-	    </div>
+	    </Page>
 
 	);	
 }

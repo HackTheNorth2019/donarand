@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
+import WelcomeHeader from './WelcomeHeader';
 
 import * as Data from './data.js';
 
@@ -58,23 +59,23 @@ const Home = () => {
 	return(        
 		<div id="homewrapper">
 			<Button onClick={call()}/>
-			<div style={{height:200}}/>
-			<div className={classes.root} style={{height:200, textAlign:'center'}}>
-				<h1>Welcome to WEBSITENAME </h1>
-			</div>
+			<WelcomeHeader/>
 			<div className={classes.root}>
-		      <Grid container spacing={6}>
-		      	<Grid item xs={4}>
+		      <Grid container spacing={6} 
+					  direction="row"
+					  justify="center"
+					  alignItems="center">
+		      	<Grid item xs={3}>
 		        	<Link to={Data.navbar_items[0][1]}> 
 				          <Paper className={classes.paper}>{Data.navbar_items[0][0]}</Paper>
 			        </Link>
 			    </Grid>
-		        <Grid item xs={4}>
+		        <Grid item xs={3}>
 		        	<Link to={Data.navbar_items[1][1]}> 
 				          <Paper className={classes.paper}>{Data.navbar_items[1][0]}</Paper>
 			        </Link>
 			    </Grid>
-			    <Grid item xs={4}>
+			    <Grid item xs={3}>
 		        	<Link to={Data.navbar_items[2][1]}> 
 				          <Paper className={classes.paper}>{Data.navbar_items[2][0]}</Paper>
 			        </Link>

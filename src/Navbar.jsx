@@ -36,7 +36,8 @@ export default class TopNavbar extends Component {
     genOptions() {
         var ret = [];
         for(var i = 0; i < Data.navbar_items.length; i++){
-          ret.push(<Link to={Data.navbar_items[i][1]} key={"key" + Data.navbar_items[i][0]} > {Data.navbar_items[i][0]} &nbsp; &nbsp; </Link>)
+          ret.push(<span><Link to={Data.navbar_items[i][1]} key={"key" + Data.navbar_items[i][0]} > {Data.navbar_items[i][0]} </Link> 
+            <span>&nbsp; &nbsp;</span></span> )
         }
         return ret;
     }
@@ -45,7 +46,8 @@ export default class TopNavbar extends Component {
       return (
         <div>
           <Navbar color="light" light expand="md">
-            <NavbarBrand href="/home">reactstrap</NavbarBrand>
+            <img src={require('./heart-small.png')} />
+            <NavbarBrand href="/home">{Data.NAME}</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>

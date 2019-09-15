@@ -3,3 +3,8 @@ export const navbar_items = [
 	["Register as a Donor","/donate"],
 	["Search Past Donations","/searchhistory"]
 ]
+
+
+export const NAME = 'DonerAnd';
+
+export const HEADER_TEXT = 'A modern solution to finding and recording blood and organ donations'

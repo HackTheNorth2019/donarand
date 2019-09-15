@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import './App.css';
 import { Fragment } from 'react'
 import * as firebase from "firebase/app";
+import * as Data from './data.js';
 import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
@@ -11,6 +12,7 @@ import GoogleButton from 'react-google-button'
 import {Form,Col,Button} from 'react-bootstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import WelcomeHeader from './WelcomeHeader.jsx'
 
 const token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1";
 const server = "http://hackathon.algodev.network";
@@ -101,15 +103,14 @@ render(){
     return(<Redirect push to="/home"/>)
   }
   return(
-    <div>
-      <h1>Welcome to the login page for DonorAnd</h1>
-      <h3>Flavor text </h3>
+    <div style={{display:'flex', flexDirection:'column', alignItems:"center", justifyContent:"center"}}>
+      <WelcomeHeader/>
         <Fragment>
          <GoogleButton
           onClick={(e) => {this.handleClick(e)}}
           />
         </Fragment>
-      </div>
+    </div>
   )
 }
 }

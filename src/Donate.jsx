@@ -6,6 +6,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import GoogleButton from 'react-google-button'
+import Page from './Page.jsx'
 
 import {Form,Col,Button} from 'react-bootstrap';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -151,52 +152,52 @@ async handleSubmit(e){
 render(){
   
   return(
-    <div>
-    <Form>
-    <Form.Row>
-      <Form.Group as={Col} controlId="formGridEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" placeholder="Enter email"  value={this.state.email} onChange={this.handleChangeone} />
-      </Form.Group>
-  
-    </Form.Row>
-  
-    <GooglePlacesAutocomplete
-      onSelect={({ description }) => (
-      this.setState({ address: description })
-    )}
-    />
-  
-    <Form.Row>
+    <Page>
+      <Form>
+      <Form.Row>
+        <Form.Group as={Col} controlId="formGridEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" placeholder="Enter email"  value={this.state.email} onChange={this.handleChangeone} />
+        </Form.Group>
     
-  
-      <Form.Group as={Col} controlId="formGridState" >
-        <Form.Label>Blood available for donation :</Form.Label>
-        <Form.Control as="select" value={this.state.bloodgroup} onChange={this.handleChangetwo} > 
-          <option></option>
-          <option>A+</option>
-          <option>A-</option>
-          <option>B-</option>
-          <option>B+</option>
-          <option>AB+</option>
-          <option>AB-</option>
-          <option>O+</option>
-          <option>O-</option>
-        </Form.Control>
-      </Form.Group>
-  
+      </Form.Row>
+    
+      <GooglePlacesAutocomplete
+        onSelect={({ description }) => (
+        this.setState({ address: description })
+      )}
+      />
+    
+      <Form.Row>
       
-    </Form.Row>
-  
-    <Form.Group id="formGridCheckbox">
-      <Form.Check type="checkbox" label="Check me out" />
-    </Form.Group>
-  
-    <Button variant="primary" type="submit" onClick={(e) => this.handleSubmit(e)}>
-      Submit
-    </Button>
-  </Form>
-  </div>
+    
+        <Form.Group as={Col} controlId="formGridState" >
+          <Form.Label>Blood available for donation :</Form.Label>
+          <Form.Control as="select" value={this.state.bloodgroup} onChange={this.handleChangetwo} > 
+            <option></option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B-</option>
+            <option>B+</option>
+            <option>AB+</option>
+            <option>AB-</option>
+            <option>O+</option>
+            <option>O-</option>
+          </Form.Control>
+        </Form.Group>
+    
+        
+      </Form.Row>
+    
+      <Form.Group id="formGridCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+    
+      <Button variant="primary" type="submit" onClick={(e) => this.handleSubmit(e)}>
+        Submit
+      </Button>
+    </Form>
+  </Page>
   )
 }
 }

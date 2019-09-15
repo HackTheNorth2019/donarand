@@ -5,23 +5,71 @@ import Searchhistory from './Searchhistory.jsx'
 import Searchdonors from './Searchdonors.jsx';
 import Login from './Login.jsx';
 import Donate from './Donate.jsx';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { 
+  CSSTransition, 
+  TransitionGroup 
+} from 'react-transition-group';
+import TopNavbar from './Navbar.jsx'
+
+import './styles.css';
+var regex = /\b(?!home)\b\S+/i;
+
+const supportsHistory = 'pushState' in window.history;
 
 class App extends Component {
+   
   render() {
     return (
       <div>
       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAGuNHq0Pwt5S0dkhlCULDFTYbWNSszRQ&callback=initMap"
         type="text/javascript"></script>
 
-        <Router>
+        <Router forceRefresh={!supportsHistory}>
      
-            <Route exact path="/" component={Login}/>
-            <Route path="/home" component={Home} />
-            <Route path="/searchhistory" component={Searchhistory} />
-            <Route path="/searchdonors" component={Searchdonors} />
-            <Route path="/donate" component={Donate} />
+            
+            <div>
+              <Route exact path="/" component={Login}/>
+              <Route path={regex} component={TopNavbar} />
+              <main>
+                <Route
+                  render={({ location }) => {
+                    const { pathname } = location;
+                    return (
+                      <div>
 
+                      <TransitionGroup>
+                        <CSSTransition 
+                          key={pathname}
+                          classNames="page"
+                          timeout={{
+                            enter: 1000,
+                            exit: 1000,
+                          }}
+                        >
+
+                          <Route
+                            location={location}
+                            render={() => (
+                          
+                              
+                              <Switch>
+                                <Route path="/home" component={Home} />
+                                <Route path="/searchhistory" component={Searchhistory} />
+                                <Route path="/searchdonors" component={Searchdonors} />
+                                <Route path="/donate" component={Donate} />
+                              </Switch>
+                              
+                            )}
+                          />
+                        </CSSTransition>
+                      </TransitionGroup>
+                      </div>
+                    );
+                  }}
+                />
+              </main>
+            </div>
         </Router>
       </div>
     );
