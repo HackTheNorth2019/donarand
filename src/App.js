@@ -8,7 +8,8 @@ import "firebase/database";
 import GoogleButton from 'react-google-button'
 
 import {Form,Col,Button} from 'react-bootstrap';
-import Autocomplete from 'react-google-autocomplete';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
 const token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1";
 const server = "http://hackathon.algodev.network";
@@ -57,7 +58,9 @@ class App extends Component {
       status: "please wait",
       bloodgroup: '',
       address: '',
-      email: ''
+      email: '',
+      latitude: 0.00,
+      longitude: 0.00
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange  = this.handleChange.bind(this)
@@ -108,15 +111,33 @@ handleClick(e){
 
 async handleSubmit(e){
 
+  var latitude = {
 
+  }
+  var longitude = {
+
+  }
   e.preventDefault();
   console.log(this.state.email)
   console.log(this.state.bloodgroup)
   console.log(this.state.address)
+  geocodeByAddress(this.state.address)
+  .then(results => getLatLng(results[0]))
+  .then(({ lat, lng }) =>{
+    console.log(lat)
+    latitude[0] = lat 
+   longitude[0] = lng
+  }
+   
+  );
+
+  
+  console.log(longitude[0])
   let data = {
     email : this.state.email,
     bloodgroup : this.state.bloodgroup,
-    address: this.state.address
+    latitude: latitude[0],
+    longitude: longitude[0]
   }
 
   try{
@@ -165,10 +186,11 @@ render(){
   
     </Form.Row>
   
-    <Form.Group as={Col} controlId="formGridCity">
-        <Form.Label>Address</Form.Label>
-        <Form.Control value={this.state.address} onChange={this.handleChange}  />
-      </Form.Group>
+    <GooglePlacesAutocomplete
+      onSelect={({ description }) => (
+      this.setState({ address: description })
+    )}
+    />
   
     <Form.Row>
     
@@ -213,6 +235,7 @@ render(){
     <div>
     
       <h1>Welcome to the login page for DonorAnd</h1>
+    
         {content}
    
         <pre>{this.state.status}</pre>
